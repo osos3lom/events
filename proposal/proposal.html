@@ -1,0 +1,817 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Jeddah Sea — Coastal Commerce Platform Proposal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     Red Sea Coastal — dark luxury editorial proposal
+     Palette: abyss teal-black, Red Sea gold, shoreline aqua, sand
+     ============================================================ */
+  :root{
+    --abyss:#03090C;
+    --deep:#071A20;
+    --deep-2:#0B2730;
+    --gold:#D4AF37;
+    --gold-soft:#E8C765;
+    --aqua:#3FD8C8;
+    --sand:#F4EFE6;
+    --paper:#FBFAF7;
+    --ink:#0E1A1E;
+    --ink-2:#3D5058;
+    --ink-3:#6B818A;
+    --rule:#E2DCD0;
+    --coral:#E4664F;
+  }
+
+  @page { size: A4; margin: 0; }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  html{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+
+  body{
+    font-family:'Outfit', 'Segoe UI', system-ui, sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    font-size:10.2pt;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- page shell ---------- */
+  .page{
+    width:210mm; height:297mm;
+    position:relative; overflow:hidden;
+    page-break-after:always; break-after:page;
+    background:var(--paper);
+    padding:18mm 16mm 16mm;
+    display:flex; flex-direction:column;
+  }
+  .page:last-child{ page-break-after:auto; break-after:auto; }
+  .page.dark{ background:var(--abyss); color:var(--sand); }
+
+  /* ---------- running header / footer ---------- */
+  .runhead{
+    position:absolute; top:9mm; left:16mm; right:16mm;
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:6.6pt; letter-spacing:.19em; text-transform:uppercase;
+    font-weight:700; color:var(--ink-3);
+    padding-bottom:3mm; border-bottom:.4pt solid var(--rule);
+  }
+  .runhead .rh-mark{ color:var(--gold); }
+  .dark .runhead{ color:#5E7A83; border-bottom-color:rgba(255,255,255,.10); }
+
+  .folio{
+    position:absolute; bottom:9mm; left:16mm; right:16mm;
+    display:flex; justify-content:space-between; align-items:baseline;
+    font-size:6.8pt; letter-spacing:.13em; text-transform:uppercase;
+    color:var(--ink-3); font-weight:600;
+    padding-top:3mm; border-top:.4pt solid var(--rule);
+  }
+  .folio b{ font-size:9pt; color:var(--ink); letter-spacing:0; }
+  .dark .folio{ color:#5E7A83; border-top-color:rgba(255,255,255,.10); }
+  .dark .folio b{ color:var(--gold); }
+
+  .body{ flex:1; min-height:0; padding-top:6mm; }
+
+  /* ---------- type ---------- */
+  .eyebrow{
+    font-size:7pt; letter-spacing:.26em; text-transform:uppercase;
+    font-weight:800; color:var(--gold);
+    display:flex; align-items:center; gap:2.5mm; margin-bottom:3.5mm;
+  }
+  .eyebrow::after{ content:''; flex:1; height:.4pt; background:linear-gradient(90deg,var(--gold),transparent); }
+
+  h1{
+    font-family:'Fraunces',Georgia,serif;
+    font-size:33pt; line-height:1.03; font-weight:600;
+    letter-spacing:-.018em; margin-bottom:5mm;
+  }
+  h2{
+    font-family:'Fraunces',Georgia,serif;
+    font-size:19.5pt; line-height:1.12; font-weight:600;
+    letter-spacing:-.014em; margin-bottom:3.5mm;
+  }
+  h3{
+    font-size:10.5pt; font-weight:800; letter-spacing:-.005em;
+    margin-bottom:1.6mm;
+  }
+  .lede{
+    font-size:11.4pt; line-height:1.55; color:var(--ink-2);
+    font-weight:300; margin-bottom:6mm; max-width:150mm;
+  }
+  .dark .lede{ color:#9DB4BC; }
+  p{ margin-bottom:3mm; color:var(--ink-2); }
+  .dark p{ color:#9DB4BC; }
+  strong{ color:var(--ink); font-weight:700; }
+  .dark strong{ color:var(--sand); }
+  .gold{ color:var(--gold); }
+
+  /* ---------- cover ---------- */
+  .cover{
+    padding:0; background:
+      radial-gradient(120% 80% at 78% 8%, rgba(63,216,200,.16), transparent 58%),
+      radial-gradient(95% 70% at 12% 96%, rgba(212,175,55,.20), transparent 62%),
+      linear-gradient(168deg,#03090C 0%,#071A20 46%,#0B2730 100%);
+    color:var(--sand);
+    display:flex; flex-direction:column; justify-content:space-between;
+  }
+  .cover-inner{ padding:20mm 18mm; display:flex; flex-direction:column; height:100%; }
+  /* AlamLabs mark is already dark-ground artwork — show it as-is, not silhouetted. */
+  .cover-brand{ display:flex; align-items:center; gap:6mm; margin-bottom:auto; }
+  .cover-logo{ height:30mm; width:30mm; border-radius:50%; object-fit:cover; }
+  .cover-brand .cb-txt{ line-height:1.3; }
+  .cover-brand .cb-name{
+    font-size:12pt; font-weight:800; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--sand);
+  }
+  .cover-brand .cb-name em{ font-style:normal; color:var(--gold); }
+  .cover-brand .cb-sub{
+    font-size:7.2pt; letter-spacing:.2em; text-transform:uppercase;
+    color:#6E8B94; font-weight:700; margin-top:1mm;
+  }
+  .cover h1{
+    font-size:44pt; line-height:.98; letter-spacing:-.028em;
+    margin:0 0 6mm; max-width:160mm;
+  }
+  .cover h1 em{ font-style:italic; color:var(--gold); }
+  .cover-sub{
+    font-size:12.5pt; font-weight:300; line-height:1.5;
+    color:#A8C2C9; max-width:135mm; margin-bottom:9mm;
+  }
+  .cover-rule{ height:1.6pt; width:34mm; background:linear-gradient(90deg,var(--gold),var(--aqua)); margin-bottom:7mm; }
+  .cover-meta{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:6mm;
+    border-top:.5pt solid rgba(255,255,255,.16); padding-top:6mm;
+  }
+  .cover-meta .k{
+    font-size:6.4pt; letter-spacing:.2em; text-transform:uppercase;
+    color:#6E8B94; font-weight:800; margin-bottom:1.5mm;
+  }
+  .cover-meta .v{ font-size:10pt; font-weight:600; color:var(--sand); line-height:1.35; }
+  .cover-meta .v small{ display:block; font-size:7.6pt; font-weight:400; color:#7F9AA2; margin-top:.6mm; }
+
+  .cover-badges{ display:flex; gap:2.5mm; margin-bottom:7mm; flex-wrap:wrap; }
+  .cbadge{
+    font-size:7.2pt; font-weight:700; letter-spacing:.05em;
+    padding:1.8mm 3.4mm; border-radius:99px;
+    border:.5pt solid rgba(212,175,55,.5); color:var(--gold-soft);
+    background:rgba(212,175,55,.08);
+  }
+
+  /* ---------- shot frames ---------- */
+  figure{ margin:0 0 4mm; }
+  .shot{
+    width:100%; display:block; border-radius:2.4mm;
+    border:.5pt solid var(--rule);
+    box-shadow:0 3mm 9mm rgba(6,26,32,.14);
+    background:#fff;
+  }
+  .dark .shot{ border-color:rgba(255,255,255,.13); box-shadow:0 3mm 12mm rgba(0,0,0,.5); }
+  .shot.crop-top{ object-fit:cover; object-position:top; height:88mm; }
+  .shot.crop-tall{ object-fit:cover; object-position:top; height:112mm; }
+  /* Scroll-position captures can clip a heading against the sticky navbar — bite off the top edge. */
+  .shot.crop-below{ object-fit:cover; object-position:center 22%; height:106mm; }
+  .shot.crop-hero{ object-fit:cover; object-position:center top; height:96mm; }
+  figcaption{
+    font-size:7.4pt; color:var(--ink-3); margin-top:2.2mm;
+    display:flex; gap:2mm; align-items:baseline; line-height:1.4;
+  }
+  figcaption b{ color:var(--gold); font-weight:800; letter-spacing:.08em; font-size:6.8pt; text-transform:uppercase; white-space:nowrap; }
+  .dark figcaption{ color:#7F9AA2; }
+
+  /* ---------- grids & cards ---------- */
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:5mm; }
+  .grid3{ display:grid; grid-template-columns:repeat(3,1fr); gap:4mm; }
+  .grid4{ display:grid; grid-template-columns:repeat(4,1fr); gap:3mm; }
+
+  .card{
+    border:.5pt solid var(--rule); border-radius:2.4mm;
+    padding:4.5mm 4.5mm 5mm; background:#fff;
+  }
+  .card .num{
+    font-family:'Fraunces',Georgia,serif; font-size:15pt; color:var(--gold);
+    font-weight:600; line-height:1; margin-bottom:2.5mm; display:block;
+  }
+  .card p{ font-size:8.8pt; line-height:1.5; margin:0; color:var(--ink-2); }
+  .dark .card{ background:rgba(255,255,255,.035); border-color:rgba(255,255,255,.11); }
+  .dark .card h3{ color:var(--sand); }
+  .dark .card p{ color:#9DB4BC; }
+
+  .vcard{
+    border:.5pt solid var(--rule); border-radius:2.4mm; overflow:hidden; background:#fff;
+  }
+  .vcard .vc-top{ padding:4mm 4mm 3.5mm; border-bottom:.5pt solid var(--rule); }
+  .vcard .vc-kicker{ font-size:6.4pt; letter-spacing:.18em; text-transform:uppercase; font-weight:800; color:var(--gold); margin-bottom:1.5mm; }
+  .vcard h3{ font-size:11pt; margin-bottom:1.2mm; }
+  .vcard .vc-body{ padding:3.5mm 4mm 4mm; }
+  .vcard ul{ list-style:none; }
+  .vcard li{ font-size:8.4pt; color:var(--ink-2); padding-left:4mm; position:relative; margin-bottom:1.3mm; line-height:1.45; }
+  .vcard li::before{ content:''; position:absolute; left:0; top:1.55mm; width:1.6mm; height:1.6mm; border-radius:50%; background:var(--aqua); }
+
+  /* ---------- feature list ---------- */
+  .flist{ list-style:none; }
+  .flist li{
+    position:relative; padding-left:6.5mm; margin-bottom:2.8mm;
+    font-size:9.2pt; line-height:1.5; color:var(--ink-2);
+  }
+  .flist li::before{
+    content:''; position:absolute; left:0; top:1.5mm;
+    width:3.2mm; height:3.2mm; border-radius:.7mm;
+    background:linear-gradient(135deg,var(--gold),var(--gold-soft));
+  }
+  .flist li b{ color:var(--ink); }
+  .dark .flist li{ color:#9DB4BC; }
+  .dark .flist li b{ color:var(--sand); }
+
+  /* ---------- stat band ---------- */
+  .stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:0; border:.5pt solid var(--rule); border-radius:2.4mm; overflow:hidden; }
+  .stats > div{ padding:4.5mm 4mm; border-right:.5pt solid var(--rule); }
+  .stats > div:last-child{ border-right:none; }
+  .stats .s-v{ font-family:'Fraunces',Georgia,serif; font-size:19pt; font-weight:600; color:var(--ink); line-height:1; margin-bottom:1.8mm; letter-spacing:-.02em; }
+  .stats .s-v span{ font-size:9pt; color:var(--gold); }
+  .stats .s-k{ font-size:6.6pt; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); font-weight:700; line-height:1.35; }
+  .dark .stats{ border-color:rgba(255,255,255,.13); }
+  .dark .stats > div{ border-right-color:rgba(255,255,255,.13); }
+  .dark .stats .s-v{ color:var(--sand); }
+  .dark .stats .s-k{ color:#6E8B94; }
+
+  /* ---------- timeline ---------- */
+  .tl{ position:relative; margin-top:2mm; }
+  .tl::before{ content:''; position:absolute; left:3.4mm; top:3mm; bottom:3mm; width:.6pt; background:linear-gradient(180deg,var(--gold),var(--aqua)); }
+  .tl-row{ position:relative; padding-left:13mm; margin-bottom:4.6mm; }
+  .tl-row:last-child{ margin-bottom:0; }
+  .tl-dot{
+    position:absolute; left:0; top:.4mm; width:7mm; height:7mm; border-radius:50%;
+    background:var(--abyss); border:.6pt solid var(--gold); color:var(--gold);
+    font-size:7.4pt; font-weight:800; display:flex; align-items:center; justify-content:center;
+  }
+  .tl-day{ font-size:6.6pt; letter-spacing:.19em; text-transform:uppercase; font-weight:800; color:var(--aqua); margin-bottom:.8mm; }
+  .tl-row h3{ font-size:10pt; margin-bottom:1mm; }
+  .tl-row p{ font-size:8.6pt; margin:0; line-height:1.5; }
+
+  /* ---------- price ---------- */
+  .price-hero{
+    border:.6pt solid rgba(212,175,55,.42); border-radius:3mm;
+    background:linear-gradient(150deg,rgba(212,175,55,.10),rgba(63,216,200,.05));
+    padding:7mm 7mm 6.5mm; margin-bottom:5mm;
+  }
+  .price-hero .ph-k{ font-size:6.8pt; letter-spacing:.22em; text-transform:uppercase; font-weight:800; color:var(--gold); margin-bottom:2.5mm; }
+  .price-hero .ph-v{
+    font-family:'Fraunces',Georgia,serif; font-size:40pt; line-height:1;
+    font-weight:600; color:var(--sand); letter-spacing:-.03em; margin-bottom:1mm;
+  }
+  .price-hero .ph-v span{ font-size:15pt; color:var(--gold); letter-spacing:0; }
+  .price-hero .ph-note{ font-size:9pt; color:#9DB4BC; }
+
+  .prow{
+    display:flex; justify-content:space-between; align-items:baseline; gap:4mm;
+    padding:3.4mm 0; border-bottom:.4pt solid rgba(255,255,255,.11);
+  }
+  .prow:last-child{ border-bottom:none; }
+  .prow .pl{ font-size:9.2pt; font-weight:600; color:var(--sand); }
+  .prow .pl small{ display:block; font-size:7.8pt; font-weight:400; color:#7F9AA2; margin-top:.4mm; }
+  .prow .pv{ font-size:9.4pt; font-weight:700; color:var(--gold); white-space:nowrap; }
+
+  /* ---------- callout ---------- */
+  .callout{
+    border-left:1.6pt solid var(--gold); background:rgba(212,175,55,.07);
+    padding:4mm 5mm; border-radius:0 2mm 2mm 0; margin:4mm 0;
+  }
+  .callout p{ margin:0; font-size:9pt; }
+  .callout .co-k{ font-size:6.6pt; letter-spacing:.2em; text-transform:uppercase; font-weight:800; color:var(--gold); margin-bottom:1.5mm; }
+
+  /* ---------- payments strip ---------- */
+  .pay{ display:flex; gap:2.5mm; align-items:center; flex-wrap:wrap; }
+  .pay div{
+    height:11mm; padding:0 3.5mm; border:.5pt solid var(--rule); border-radius:1.8mm;
+    background:#fff; display:flex; align-items:center; justify-content:center;
+  }
+  .pay img{ max-height:5mm; max-width:19mm; object-fit:contain; }
+
+  /* ---------- misc ---------- */
+  .kv{ display:grid; grid-template-columns:38mm 1fr; gap:2mm 5mm; font-size:9pt; }
+  .kv dt{ font-size:6.8pt; letter-spacing:.16em; text-transform:uppercase; font-weight:800; color:var(--ink-3); padding-top:.8mm; }
+  .kv dd{ color:var(--ink-2); }
+  .dark .kv dt{ color:#6E8B94; }
+  .dark .kv dd{ color:#9DB4BC; }
+
+  .sigline{ margin-top:auto; padding-top:6mm; border-top:.5pt solid rgba(255,255,255,.14); }
+
+  /* Contact block — mark sits beside the details so the page signs off with the brand. */
+  .contact{
+    display:flex; align-items:center; gap:8mm;
+    border:.5pt solid var(--rule); border-radius:2.4mm;
+    padding:6mm 7mm; background:#fff;
+  }
+  .contact-mark{ height:26mm; width:26mm; border-radius:50%; object-fit:cover; flex:none; }
+  .contact .kv{ flex:1; }
+</style>
+</head>
+<body>
+
+<!-- ============================ 1. COVER ============================ -->
+<section class="page cover">
+  <div class="cover-inner">
+    <div class="cover-brand">
+      <img class="cover-logo" src="assets/alamlabs-logo.png" alt="AlamLabs">
+      <div class="cb-txt">
+        <div class="cb-name"><em>Alam</em>Labs</div>
+        <div class="cb-sub">Software &amp; platform engineering</div>
+      </div>
+    </div>
+
+    <div class="cover-rule"></div>
+    <div class="eyebrow" style="color:var(--aqua)">Commercial Proposal &nbsp;·&nbsp; Red Sea Season 2026</div>
+    <h1>The booking engine<br>the <em>Red Sea coast</em><br>has been missing.</h1>
+    <p class="cover-sub">
+      A production-ready, bilingual commerce platform for coastal operators in Jeddah —
+      events and concerts, beach day passes, yacht and catamaran charters, and
+      waterfront leases. Built for Saudi payments, Saudi compliance, and Saudi guests.
+    </p>
+
+    <div class="cover-badges">
+      <span class="cbadge">Delivered in 7 days maximum</span>
+      <span class="cbadge">1 year technical support — 5,000 SAR</span>
+      <span class="cbadge">Arabic &amp; English, RTL-native</span>
+    </div>
+
+    <div class="cover-meta">
+      <div>
+        <div class="k">Prepared for</div>
+        <div class="v">Red Sea Coastal Operators<small>Marinas · Beach clubs · Charter fleets · Resorts</small></div>
+      </div>
+      <div>
+        <div class="k">Prepared by</div>
+        <div class="v">Osama Aalam — AlamLabs<small>Licensed freelance developer<br>Licence FL-004759783</small></div>
+      </div>
+      <div>
+        <div class="k">Reference</div>
+        <div class="v">JS-2026-RS<small>Valid 30 days from issue</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 2. THE PROBLEM ============================ -->
+<section class="page">
+  <div class="runhead"><span>Jeddah Sea <span class="rh-mark">·</span> Coastal Commerce Platform</span><span>The Opportunity</span></div>
+  <div class="body">
+    <div class="eyebrow">01 — The Opportunity</div>
+    <h2>Your inventory is perishable.<br>Your booking process isn't built for it.</h2>
+    <p class="lede">
+      A sunset cruise berth, a Friday cabana, a Saturday charter slot — every one of them
+      is worth full price until the moment it expires, and nothing after. Most operators
+      on this coast still sell them through WhatsApp threads, Instagram DMs, and a
+      spreadsheet someone updates by hand.
+    </p>
+
+    <div class="grid2" style="margin-bottom:6mm">
+      <div class="card">
+        <span class="num">01</span>
+        <h3>Manual booking leaks revenue</h3>
+        <p>Double-booked cabanas, unrecorded deposits, and no-shows you learn about at the gate. Every reconciliation is a phone call.</p>
+      </div>
+      <div class="card">
+        <span class="num">02</span>
+        <h3>No scarcity, no urgency</h3>
+        <p>When a guest cannot see that 14 of 100 VIP seats remain, there is no reason to book today instead of next week — or at all.</p>
+      </div>
+      <div class="card">
+        <span class="num">03</span>
+        <h3>Compliance handled off-system</h3>
+        <p>ZATCA VAT invoices, guest ID capture, and Coast Guard manifests assembled by hand for every departure.</p>
+      </div>
+      <div class="card">
+        <span class="num">04</span>
+        <h3>Arabic treated as an afterthought</h3>
+        <p>A machine-translated page with broken right-to-left layout tells a Saudi guest exactly how much you valued their experience.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="co-k">The proposition</div>
+      <p><strong>Jeddah Sea is already built.</strong> This is not a discovery project or a six-month
+      engagement — it is a working platform, shown in the screenshots that follow, configured
+      to your brand, your inventory, and your marina, and handed over inside seven days.</p>
+    </div>
+
+    <div class="stats" style="margin-top:6mm">
+      <div><div class="s-v">7<span> days</span></div><div class="s-k">Maximum time to<br>a live storefront</div></div>
+      <div><div class="s-v">4</div><div class="s-k">Revenue lines on<br>one platform</div></div>
+      <div><div class="s-v">2</div><div class="s-k">Languages, both<br>fully native</div></div>
+      <div><div class="s-v">0<span>%</span></div><div class="s-k">Commission taken<br>on your bookings</div></div>
+    </div>
+
+    <p style="margin-top:6mm; font-size:8.8pt; color:var(--ink-3); line-height:1.55">
+      The pages that follow walk through the platform as a guest experiences it, then as your
+      operations team runs it, and close with the delivery schedule and commercial terms.
+    </p>
+  </div>
+  <div class="folio"><span>Commercial Proposal · Red Sea Season 2026</span><b>02</b></div>
+</section>
+
+<!-- ============================ 3. WHAT IT IS ============================ -->
+<section class="page dark">
+  <div class="runhead"><span>Jeddah Sea <span class="rh-mark">·</span> Coastal Commerce Platform</span><span>The Platform</span></div>
+  <div class="body">
+    <div class="eyebrow">02 — The Platform</div>
+    <h2>One storefront.<br>Four revenue lines.</h2>
+    <p class="lede">
+      Coastal businesses rarely sell just one thing. The platform runs all four
+      categories side by side — each with its own booking logic, its own pricing model,
+      and its own compliance requirements — from a single operator console.
+    </p>
+
+    <figure>
+      <img class="shot crop-hero" src="opt/01-landing.jpg" alt="Jeddah Sea public landing page with live allocation board">
+      <figcaption><b>Storefront</b><span>The live allocation board opens the page with real remaining
+      capacity per tier, claimed percentages, and instalment pricing — scarcity made visible at the
+      moment of intent, not buried three clicks deep.</span></figcaption>
+    </figure>
+
+    <div class="grid4" style="margin-top:5mm">
+      <div class="card"><span class="num">01</span><h3>Events</h3><p>Concerts and shoreline festivals with tiered admission, VIP decks, and private majlis tables.</p></div>
+      <div class="card"><span class="num">02</span><h3>Day Passes</h3><p>Beach and pool access with ladies-only, family, and mixed privacy modes.</p></div>
+      <div class="card"><span class="num">03</span><h3>Voyages</h3><p>Yacht and catamaran charters with vessel specs, crew, and departure slots.</p></div>
+      <div class="card"><span class="num">04</span><h3>Leases</h3><p>Overwater chalets and gold-key memberships sold by concierge, not by cart.</p></div>
+    </div>
+  </div>
+  <div class="folio"><span>Commercial Proposal · Red Sea Season 2026</span><b>03</b></div>
+</section>
+
+<!-- ============================ 4. TWO-SPEED ============================ -->
+<section class="page">
+  <div class="runhead"><span>Jeddah Sea <span class="rh-mark">·</span> Coastal Commerce Platform</span><span>Selling Model</span></div>
+  <div class="body">
+    <div class="eyebrow">03 — Selling Model</div>
+    <h2>Fast lane and slow lane,<br>on the same page.</h2>
+    <p class="lede">
+      A 450 SAR beach pass and a 45,000 SAR seasonal chalet lease should not be sold the
+      same way. The platform runs two commercial speeds at once: instant self-service
+      checkout for ticketed inventory, and a vetted concierge callback for high-value assets.
+    </p>
+
+    <figure>
+      <img class="shot crop-below" src="opt/02-verticals.jpg" alt="Two-speed verticals: instant cart and concierge lane">
+      <figcaption><b>Two-speed</b><span>Ticketed inventory converts in-session with live remaining counts.
+      Invitation-only inventory — memberships, moorings, chalet leases — is routed to a vetted
+      KYC enquiry with a 24-hour callback promise, never to a public cart.</span></figcaption>
+    </figure>
+
+    <div class="grid2" style="margin-top:1mm">
+      <div class="vcard">
+        <div class="vc-top">
+          <div class="vc-kicker">Fast lane</div>
+          <h3>Self-service checkout</h3>
+        </div>
+        <div class="vc-body"><ul>
+          <li>Live per-tier remaining capacity</li>
+          <li>Add-ons and upgrades at point of sale</li>
+          <li>Instant confirmation and digital pass</li>
+          <li>Split payment over 4 instalments</li>
+        </ul></div>
+      </div>
+      <div class="vcard">
+        <div class="vc-top">
+          <div class="vc-kicker">Slow lane</div>
+          <h3>Concierge enquiry</h3>
+        </div>
+        <div class="vc-body"><ul>
+          <li>No public pricing exposure</li>
+          <li>Vetted KYC before viewing</li>
+          <li>Private viewing scheduling</li>
+          <li>24-hour callback commitment</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+  <div class="folio"><span>Commercial Proposal · Red Sea Season 2026</span><b>04</b></div>
+</section>
+
+<!-- ============================ 5. TIERS & UPSELL ============================ -->
+<section class="page">
+  <div class="runhead"><span>Jeddah Sea <span class="rh-mark">·</span> Coastal Commerce Platform</span><span>Yield &amp; Upsell</span></div>
+  <div class="body">
+    <div class="eyebrow">04 — Yield &amp; Upsell</div>
+    <h2>Sell the same evening<br>at four different prices.</h2>
+    <p class="lede">
+      Tiered inventory is where coastal margin actually lives. The same sunset event is sold
+      as a 450 SAR shoreline pass, an 1,100 SAR VIP high-deck seat, and a 7,500 SAR private
+      majlis for eight — with optional concierge and catering attached at checkout.
+    </p>
+
+    <figure>
+      <img class="shot crop-tall" src="opt/17-checkout-step1.jpg" alt="Tier selection with live reservation summary and VAT">
+      <figcaption><b>Tier &amp; summary</b><span>Every tier shows live remaining stock and its own perk set.
+      The reservation summary computes 15% Saudi VAT in real time and carries an instant-confirmation
+      and 48-hour refund guarantee into the decision.</span></figcaption>
+    </figure>
+
+    <ul class="flist" style="margin-top:1mm">
+      <li><b>Scarcity is real, not theatrical.</b> "Only 2 left" is drawn from the same capacity counter that the door check-in decrements.</li>
+      <li><b>Add-ons at the point of intent.</b> Priority valet, caviar platters, and jet-ski packages attach to the order before payment, not after.</li>
+      <li><b>VAT computed inline.</b> The guest sees the 15% ZATCA line and the true total before committing — no surprise at the payment step.</li>
+    </ul>
+  </div>
+  <div class="folio"><span>Commercial Proposal · Red Sea Season 2026</span><b>05</b></div>
+</section>
+
+<!-- ============================ 6. MARITIME ============================ -->
+<section class="page dark">
+  <div class="runhead"><span>Jeddah Sea <span class="rh-mark">·</span> Coastal Commerce Platform</span><span>Marine Charters</span></div>
+  <div class="body">
+    <div class="eyebrow">05 — Marine Charters</div>
+    <h2>Charter booking that<br>clears the harbour.</h2>
+    <p class="lede">
+      Selling a yacht slot is not selling a ticket. The vessel, the captain, the crew count,
+      the departure window and the guest manifest are all part of the transaction — and the
+      manifest has to satisfy the Coast Guard before the boat leaves the pier.
+    </p>
+
+    <figure>
+      <img class="shot crop-tall" style="height:98mm" src="opt/06-yacht.jpg" alt="Yacht charter booking with vessel specs and departure slots">
+      <figcaption><b>Charter flow</b><span>Vessel specification, named captain, guest ceiling and crew
+      count sit above three selectable departure windows. The booking panel totals the charter with VAT
+      and confirms that the Coast Guard manifest is generated automatically on reservation.</span></figcaption>
+    </figure>
+
+    <figure style="margin-top:4mm">
+      <img class="shot" style="object-fit:cover; object-position:center 62%; height:72mm" src="opt/18-checkout-kyc.jpg" alt="Guest KYC and Coast Guard maritime passenger manifest">
+      <figcaption><b>Manifest capture</b><span>The Coast Guard passenger manifest is built inside checkout.
+      Companions are logged by name and ID as they are added, or the manifest link is shared by WhatsApp
+      for guests to complete before departure.</span></figcaption>
+    </figure>
+  </div>
+  <div class="folio"><span>Commercial Proposal · Red Sea Season 2026</span><b>06</b></div>
+</section>
+
+<!-- ============================ 7. PRIVACY & ARABIC ============================ -->
+<section class="page">
+  <div class="runhead"><span>Jeddah Sea <span class="rh-mark">·</span> Coastal Commerce Platform</span><span>Built for the Market</span></div>
+  <div class="body">
+    <div class="eyebrow">06 — Built for the Market</div>
+    <h2>Arabic-first, not<br>Arabic-translated.</h2>
+    <p class="lede">
+      The entire platform mirrors into true right-to-left layout with a licensed Arabic
+      typeface — navigation, allocation boards, pricing, forms and the operator console.
+      Guests switch locale from any page and keep their position and their cart.
+    </p>
+
+    <figure>
+      <img class="shot crop-tall" src="opt/09-arabic-rtl.jpg" alt="Full Arabic RTL version of the landing page">
+      <figcaption><b>العربية</b><span>The same landing page in Arabic — the layout is genuinely mirrored,
+      not flipped with CSS hacks. Numerals, currency, capacity rings and instalment copy all follow
+      Saudi conventions.</span></figcaption>
+    </figure>
+
+    <div class="callout" style="margin-top:4mm">
+      <div class="co-k">Privacy-aware inventory</div>
+      <p>Day-pass inventory carries a privacy classification — <strong>ladies-only</strong>,
+      <strong>family</strong>, or mixed — that guests can filter on before they see pricing. For a
+      Jeddah beach club this is not a feature; it is the difference between a bookable product
+      and an uncomfortable phone call.</p>
+    </div>
+  </div>
+  <div class="folio"><span>Commercial Proposal · Red Sea Season 2026</span><b>07</b></div>
+</section>
+
+<!-- ============================ 8. PAYMENTS ============================ -->
+<section class="page">
+  <div class="runhead"><span>Jeddah Sea <span class="rh-mark">·</span> Coastal Commerce Platform</span><span>Payments &amp; Compliance</span></div>
+  <div class="body">
+    <div class="eyebrow">07 — Payments &amp; Compliance</div>
+    <h2>The way Saudi guests<br>actually pay.</h2>
+    <p class="lede">
+      Checkout supports the full local payment stack, including buy-now-pay-later, which
+      materially widens the audience for a 7,500 SAR majlis table or a 16,675 SAR charter.
+    </p>
+
+    <div class="pay" style="margin-bottom:6mm">
+      <div><img src="assets/Mada_Logo.png" alt="mada"></div>
+      <div><img src="assets/Apple_Pay.png" alt="Apple Pay"></div>
+      <div><img src="assets/Stc_pay.png" alt="STC Pay"></div>
+      <div><img src="assets/Visa_Logo.png" alt="Visa"></div>
+      <div><img src="assets/Mastercard-Logo.png" alt="Mastercard"></div>
+      <div><img src="assets/tabby-logo.png" alt="Tabby"></div>
+      <div><img src="assets/taamara.png" alt="Tamara"></div>
+    </div>
+
+    <div class="stats" style="margin-bottom:6mm">
+      <div><div class="s-v">15<span>%</span></div><div class="s-k">ZATCA VAT<br>computed inline</div></div>
+      <div><div class="s-v">4<span>×</span></div><div class="s-k">Instalments via<br>Tabby &amp; Tamara</div></div>
+      <div><div class="s-v">4</div><div class="s-k">Saudi ID types<br>accepted at KYC</div></div>
+      <div><div class="s-v">48<span>h</span></div><div class="s-k">Refund window<br>on ticketed sales</div></div>
+    </div>
+
+    <h3 style="margin-bottom:2.5mm">Compliance handled inside the booking, not beside it</h3>
+    <ul class="flist">
+      <li><b>ZATCA-ready VAT invoicing.</b> 15% computed and displayed on every order line, carried through to the printable order record.</li>
+      <li><b>Guest identity capture.</b> National ID, Iqama, GCC ID and passport supported, with the guest manifest assembled as part of checkout.</li>
+      <li><b>Coast Guard manifest generation.</b> Vessel bookings produce their departure manifest automatically from the guest data already collected.</li>
+      <li><b>Explicit privacy consent.</b> Terms and privacy acknowledgement captured before payment is authorised.</li>
+    </ul>
+
+    <figure style="margin-top:5mm">
+      <img class="shot" style="object-fit:cover; object-position:center 40%; height:76mm" src="opt/19-checkout-payment.jpg" alt="Checkout payment step with Saudi payment methods and ZATCA breakdown">
+      <figcaption><b>Payment step</b><span>The live checkout: promo code, ZATCA VAT breakdown, and the
+      six local payment methods on one screen — a 33,350 SAR charter closing without leaving the page.</span></figcaption>
+    </figure>
+  </div>
+  <div class="folio"><span>Commercial Proposal · Red Sea Season 2026</span><b>08</b></div>
+</section>
+
+<!-- ============================ 9. OPERATOR CONSOLE ============================ -->
+<section class="page dark">
+  <div class="runhead"><span>Jeddah Sea <span class="rh-mark">·</span> Coastal Commerce Platform</span><span>Operator Console</span></div>
+  <div class="body">
+    <div class="eyebrow">08 — Operator Console</div>
+    <h2>Your side of the platform.</h2>
+    <p class="lede">
+      Everything the storefront sells, your team administers from one console — event
+      creation, ticket tiers, orders, attendees, promo codes, custom questions, broadcast
+      messaging and analytics.
+    </p>
+
+    <figure>
+      <img class="shot crop-top" style="height:84mm" src="opt/11-dashboard.jpg" alt="Event dashboard with revenue, tickets sold and check-in rate">
+      <figcaption><b>Event dashboard</b><span>Revenue, tickets sold against capacity, order count and
+      live check-in rate, with per-tier sales progress and one-click access to door check-in.</span></figcaption>
+    </figure>
+
+    <figure style="margin-top:4mm">
+      <img class="shot crop-top" style="height:72mm" src="opt/10-manage-events.jpg" alt="Multi-event management view">
+      <figcaption><b>Portfolio view</b><span>Every event across the season — live, draft and past — each
+      showing tickets sold and gross revenue at a glance. Built for operators running a calendar,
+      not a single night.</span></figcaption>
+    </figure>
+  </div>
+  <div class="folio"><span>Commercial Proposal · Red Sea Season 2026</span><b>09</b></div>
+</section>
+
+<!-- ============================ 10. GATE OPS ============================ -->
+<section class="page">
+  <div class="runhead"><span>Jeddah Sea <span class="rh-mark">·</span> Coastal Commerce Platform</span><span>Gate Operations</span></div>
+  <div class="body">
+    <div class="eyebrow">09 — Gate Operations</div>
+    <h2>From sale to gate,<br>on one system.</h2>
+    <p class="lede">
+      The pass a guest buys online is the pass your gate staff scan at the pier. No exported
+      lists, no printed spreadsheets, no radio call to the office to confirm a name.
+    </p>
+
+    <figure>
+      <img class="shot crop-top" src="opt/12-checkin.jpg" alt="Door check-in screen with live turnout rate">
+      <figcaption><b>Door check-in</b><span>Search by name, email or barcode. Live turnout rate and
+      remaining arrivals update as guests are admitted, with single-tap check-in and undo. A fullscreen
+      gate mode runs on a tablet at the entrance.</span></figcaption>
+    </figure>
+
+    <figure style="margin-top:4mm">
+      <img class="shot crop-top" src="opt/16-ticket-designer.jpg" alt="Ticket designer with QR verification pass">
+      <figcaption><b>Ticket designer</b><span>Brand the digital pass and printable PDF ticket to your own
+      accent colour and cover art, with QR verification codes issued per attendee.</span></figcaption>
+    </figure>
+  </div>
+  <div class="folio"><span>Commercial Proposal · Red Sea Season 2026</span><b>10</b></div>
+</section>
+
+<!-- ============================ 11. DELIVERY ============================ -->
+<section class="page dark">
+  <div class="runhead"><span>Jeddah Sea <span class="rh-mark">·</span> Coastal Commerce Platform</span><span>Delivery</span></div>
+  <div class="body">
+    <div class="eyebrow">10 — Delivery</div>
+    <h2>Live in seven days.<br>Maximum.</h2>
+    <p class="lede">
+      Because the platform is already built and proven, the engagement is configuration and
+      handover — not construction. Seven calendar days from signed brief to a live storefront
+      taking real bookings.
+    </p>
+
+    <div class="tl">
+      <div class="tl-row">
+        <div class="tl-dot">1</div>
+        <div class="tl-day">Day 1</div>
+        <h3>Brief &amp; asset intake</h3>
+        <p>Inventory list, pricing tiers, capacities, marina locations, brand assets, Arabic copy and payment gateway credentials collected in a single working session.</p>
+      </div>
+      <div class="tl-row">
+        <div class="tl-dot">2</div>
+        <div class="tl-day">Days 2 – 3</div>
+        <h3>Configuration &amp; branding</h3>
+        <p>Your catalogue built out across the relevant verticals, brand palette and typography applied, Arabic and English copy loaded, ticket and pass design set to your identity.</p>
+      </div>
+      <div class="tl-row">
+        <div class="tl-dot">3</div>
+        <div class="tl-day">Days 4 – 5</div>
+        <h3>Payments, VAT &amp; compliance wiring</h3>
+        <p>Payment methods connected and tested end to end, VAT and invoicing verified, guest identity capture and manifest generation configured to your operating requirements.</p>
+      </div>
+      <div class="tl-row">
+        <div class="tl-dot">4</div>
+        <div class="tl-day">Day 6</div>
+        <h3>Staff walkthrough &amp; rehearsal</h3>
+        <p>Console training for your operations team, a live gate check-in rehearsal on real devices, and a full test booking pushed through from storefront to door scan.</p>
+      </div>
+      <div class="tl-row">
+        <div class="tl-dot">5</div>
+        <div class="tl-day">Day 7</div>
+        <h3>Go live &amp; handover</h3>
+        <p>Production deployment on your domain, monitored launch, and handover of documentation and admin credentials. Support period begins.</p>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:5mm; border-left-color:var(--aqua); background:rgba(63,216,200,.08)">
+      <div class="co-k" style="color:var(--aqua)">Commitment</div>
+      <p>Seven days is a <strong>ceiling, not an estimate</strong>. If the brief and assets arrive
+      on Day 1, most single-vertical deployments complete in four to five.</p>
+    </div>
+  </div>
+  <div class="folio"><span>Commercial Proposal · Red Sea Season 2026</span><b>11</b></div>
+</section>
+
+<!-- ============================ 12. INVESTMENT ============================ -->
+<section class="page dark">
+  <div class="runhead"><span>Jeddah Sea <span class="rh-mark">·</span> Coastal Commerce Platform</span><span>Investment</span></div>
+  <div class="body">
+    <div class="eyebrow">11 — Investment</div>
+    <h2>Support priced for<br>a full season.</h2>
+
+    <div class="price-hero">
+      <div class="ph-k">Technical support · 12 months</div>
+      <div class="ph-v">5,000 <span>SAR</span></div>
+      <div class="ph-note">One flat annual fee. No per-booking commission, no per-seat licence,
+      no percentage of your gate.</div>
+    </div>
+
+    <h3 style="margin-bottom:1mm; color:var(--sand)">What the annual support covers</h3>
+    <div style="margin-bottom:5mm">
+      <div class="prow"><div class="pl">Bug fixes and defect resolution<small>Reported issues investigated and resolved throughout the term</small></div><div class="pv">Included</div></div>
+      <div class="prow"><div class="pl">Platform, security and dependency updates<small>Framework and library maintenance to keep the deployment current</small></div><div class="pv">Included</div></div>
+      <div class="prow"><div class="pl">Seasonal content &amp; catalogue updates<small>New events, tiers, pricing and capacity changes as your calendar moves</small></div><div class="pv">Included</div></div>
+      <div class="prow"><div class="pl">Operator support &amp; staff retraining<small>Direct access for your operations team, including new-staff onboarding</small></div><div class="pv">Included</div></div>
+      <div class="prow"><div class="pl">Uptime monitoring &amp; incident response<small>Production monitoring with priority response during live event windows</small></div><div class="pv">Included</div></div>
+    </div>
+
+    <h3 style="margin-bottom:1mm; color:var(--sand)">Deployment</h3>
+    <div style="margin-bottom:5mm">
+      <div class="prow"><div class="pl">Platform deployment &amp; configuration<small>Seven-day delivery as scheduled on the previous page</small></div><div class="pv">Quoted on brief</div></div>
+      <div class="prow"><div class="pl">Third-party costs<small>Payment gateway fees, domain and hosting — billed at cost, directly to you</small></div><div class="pv">At cost</div></div>
+    </div>
+
+    <div class="callout" style="border-left-color:var(--gold)">
+      <div class="co-k">Note</div>
+      <p>The one-time deployment fee is quoted against your specific brief — how many verticals
+      you run, the size of your catalogue, and whether you need custom brand work beyond the
+      standard theming. <strong>The 5,000 SAR annual support figure is fixed and does not vary
+      with deployment scope.</strong></p>
+    </div>
+  </div>
+  <div class="folio"><span>Commercial Proposal · Red Sea Season 2026</span><b>12</b></div>
+</section>
+
+<!-- ============================ 13. WHY / NEXT ============================ -->
+<section class="page">
+  <div class="runhead"><span>Jeddah Sea <span class="rh-mark">·</span> Coastal Commerce Platform</span><span>Engagement</span></div>
+  <div class="body">
+    <div class="eyebrow">12 — Engagement</div>
+    <h2>Working with a licensed<br>independent developer.</h2>
+    <p class="lede">
+      You deal directly with the person who builds and maintains the platform. No account
+      manager, no delivery pod, no handover to a junior team after signature.
+    </p>
+
+    <div class="grid2" style="margin-bottom:6mm">
+      <div class="card"><span class="num">01</span><h3>Licensed &amp; invoiceable</h3><p>Operating under a Saudi freelance licence — able to contract directly with Saudi businesses and issue compliant invoices for your records.</p></div>
+      <div class="card"><span class="num">02</span><h3>Built, not assembled</h3><p>The platform in these screenshots is a working product, not a template purchased and re-skinned. It can be extended where your operation needs it.</p></div>
+      <div class="card"><span class="num">03</span><h3>One point of contact</h3><p>The developer who ships your deployment is the developer who answers when something needs attention during the season.</p></div>
+      <div class="card"><span class="num">04</span><h3>No revenue share</h3><p>Flat fees only. Your ticket revenue is yours — the platform never takes a cut of the gate.</p></div>
+    </div>
+
+    <h3 style="margin-bottom:2.5mm">Next steps</h3>
+    <ul class="flist" style="margin-bottom:6mm">
+      <li><b>A 30-minute walkthrough.</b> A live demonstration of the platform against your own inventory, at your marina or by video call.</li>
+      <li><b>A written scope and fixed quote.</b> Issued within 48 hours of the walkthrough, with the seven-day delivery window confirmed against a start date.</li>
+      <li><b>Deployment begins on signature.</b> The clock starts the day the brief and assets are in hand.</li>
+    </ul>
+
+    <div class="contact">
+      <img class="contact-mark" src="assets/alamlabs-logo.png" alt="AlamLabs">
+      <dl class="kv">
+        <dt>Phone / WhatsApp</dt><dd>0506542290</dd>
+        <dt>Email</dt><dd>osama.aalam@gmail.com</dd>
+        <dt>Website</dt><dd>https://osamamaalam.com/</dd>
+        <dt>Freelance licence</dt><dd>FL-004759783</dd>
+        <dt>Proposal reference</dt><dd>JS-2026-RS · valid 30 days from issue</dd>
+      </dl>
+    </div>
+  </div>
+  <div class="folio"><span>Commercial Proposal · Red Sea Season 2026</span><b>13</b></div>
+</section>
+
+</body>
+</html>
