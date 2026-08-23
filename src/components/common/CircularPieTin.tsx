@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useId } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 
 interface CircularPieTinProps {
@@ -31,8 +31,9 @@ export function CircularPieTin({
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (clampedPercent / 100) * circumference;
 
-  // Gradient ID unique per render
-  const gradientId = `pie-tin-grad-${Math.random().toString(36).substr(2, 9)}`;
+  // Hydration-safe deterministic gradient ID
+  const reactId = useId();
+  const gradientId = `pie-tin-grad-${reactId.replace(/:/g, '')}`;
 
   return (
     <div className={`relative inline-flex items-center justify-center ${className}`}>

@@ -27,25 +27,19 @@ export function LuxuryNavbar({ locale = 'en', onOpenCart }: LuxuryNavbarProps) {
   // Simplified one-word navigation items
   const navLinks = [
     {
-      href: `/${locale}/#events`,
+      href: `/${locale}/events`,
       labelEn: 'Events',
       labelAr: 'فعاليات',
       icon: <Ticket className="w-4 h-4 text-amber-500 dark:text-amber-400" />
     },
     {
-      href: `/${locale}/#day-passes`,
-      labelEn: 'Tickets',
-      labelAr: 'تذاكر',
-      icon: <Sparkles className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
-    },
-    {
-      href: `/${locale}/#voyages`,
-      labelEn: 'Trips',
+      href: `/${locale}/voyages`,
+      labelEn: 'Voyages',
       labelAr: 'رحلات',
       icon: <Anchor className="w-4 h-4 text-sky-600 dark:text-sky-400" />
     },
     {
-      href: `/${locale}/#real-estate`,
+      href: `/${locale}/memberships`,
       labelEn: 'Memberships',
       labelAr: 'عضويات',
       icon: <Home className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
@@ -63,7 +57,7 @@ export function LuxuryNavbar({ locale = 'en', onOpenCart }: LuxuryNavbarProps) {
       {/* TOP FLOATING GLASSMORPHISM NAVBAR (DESKTOP & TABLET) */}
       {/* ==================================================================== */}
       <div className="fixed top-3 sm:top-5 left-0 right-0 z-50 px-3 sm:px-6 pointer-events-none">
-        <header className="max-w-7xl mx-auto pointer-events-auto rounded-full bg-white/60 dark:bg-white/10 backdrop-blur-xl border border-white/40 dark:border-white/20 shadow-xl shadow-cyan-950/5 dark:shadow-black/50 text-slate-900 dark:text-white px-3.5 sm:px-6 h-16 sm:h-18 flex items-center justify-between gap-2 sm:gap-4 transition-all duration-300">
+        <header className="max-w-7xl mx-auto pointer-events-auto rounded-xl bg-white/60 dark:bg-white/10 backdrop-blur-xl border border-white/40 dark:border-white/20 shadow-xl shadow-cyan-950/5 dark:shadow-black/50 text-slate-900 dark:text-white px-3.5 sm:px-6 h-16 sm:h-18 flex items-center justify-between gap-2 sm:gap-4 transition-all duration-300">
           {/* Left: Brand Logo */}
           <Link href={`/${locale}`} className="flex items-center gap-2.5 sm:gap-3 group shrink-0">
             <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-tr from-cyan-500/15 via-sky-500/20 to-teal-500/15 dark:bg-white/10 border border-white/60 dark:border-white/20 flex items-center justify-center p-1 shadow-xs group-hover:scale-105 transition-transform">
@@ -75,7 +69,7 @@ export function LuxuryNavbar({ locale = 'en', onOpenCart }: LuxuryNavbarProps) {
             </div>
             <div className="flex flex-col">
               <span className="font-black text-sm sm:text-base tracking-wider bg-gradient-to-r from-slate-950 via-cyan-900 to-cyan-700 dark:from-white dark:via-cyan-100 dark:to-cyan-400 bg-clip-text text-transparent uppercase">
-                {isArabic ? 'بحر جدة' : 'JEDDAH SEA'}
+                {isArabic ? 'اسم البراند' : 'JEDDAH SEA'}
               </span>
               <span className="text-[9px] tracking-widest text-cyan-700 dark:text-cyan-300 uppercase font-extrabold hidden sm:block">
                 {isArabic ? 'تجارب ساحلية' : 'COASTAL VOYAGES'}

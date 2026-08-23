@@ -20,6 +20,7 @@ export function ConciergeInquiryModal({
 }: ConciergeInquiryModalProps) {
   const isArabic = locale === 'ar';
   const [submitted, setSubmitted] = useState(false);
+  const [refCode, setRefCode] = useState('');
   const [formData, setFormData] = useState({
     fullName: '',
     phone: '+966 ',
@@ -32,11 +33,13 @@ export function ConciergeInquiryModal({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setRefCode(`JED-VIP-${Math.floor(10000 + Math.random() * 90000)}`);
     setSubmitted(true);
   };
 
   const handleReset = () => {
     setSubmitted(false);
+    setRefCode('');
     setFormData({
       fullName: '',
       phone: '+966 ',
@@ -216,7 +219,7 @@ export function ConciergeInquiryModal({
             </div>
 
             <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-xs font-mono text-[#D4AF37]">
-              REF: JED-VIP-{(Math.random() * 90000 + 10000).toFixed(0)}
+              REF: {refCode || 'JED-VIP-88421'}
             </div>
 
             <button

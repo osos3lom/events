@@ -1,15 +1,14 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
+import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import {
   Anchor,
   Sparkles,
   Home,
-  ShieldCheck,
   Star,
   Flame,
-  CheckCircle2,
 } from 'lucide-react';
 import { luxuryCatalog } from '../../data/luxuryCatalog';
 import { LuxuryNavbar } from '../../components/luxury/LuxuryNavbar';
@@ -17,7 +16,7 @@ import { LuxuryFooter } from '../../components/luxury/LuxuryFooter';
 import { WeatherMaritimeWidget } from '../../components/luxury/WeatherMaritimeWidget';
 import { ProductCard } from '../../components/luxury/ProductCard';
 import { UnifiedCheckoutModal } from '../../components/checkout/UnifiedCheckoutModal';
-import { HeroAllocation } from '../../components/landing/HeroAllocation';
+import { RelaxedVideoHero } from '../../components/landing/RelaxedVideoHero';
 import { TwoSpeedVerticals } from '../../components/landing/TwoSpeedVerticals';
 import {
   CatalogFilterBar,
@@ -34,22 +33,10 @@ export default function LuxuryLandingPage() {
   const [dayPassPrivacyFilter, setDayPassPrivacyFilter] = useState<'all' | 'ladies_only' | 'family'>('all');
   const [filters, setFilters] = useState<CatalogFilters>(EMPTY_FILTERS);
 
-  /** Results for the sticky filter bar. Rendered — unlike the variable this replaces. */
+  /** Results for the category filter bar. */
   const filteredProducts = useMemo(() => {
-    const query = filters.query.trim().toLowerCase();
-    return luxuryCatalog.filter((item) => {
-      if (filters.category !== 'all' && item.category !== filters.category) return false;
-      if (filters.location !== 'all' && item.marinaOrArea !== filters.location) return false;
-      if (!query) return true;
-      return [
-        item.title.en,
-        item.title.ar,
-        item.description.en,
-        item.description.ar,
-        item.locationName.en,
-        item.locationName.ar,
-      ].some((field) => field.toLowerCase().includes(query));
-    });
+    if (filters.category === 'all') return luxuryCatalog;
+    return luxuryCatalog.filter((item) => item.category === filters.category);
   }, [filters]);
 
   const isFiltering = hasActiveFilters(filters);
@@ -81,246 +68,203 @@ export default function LuxuryLandingPage() {
       {/* Top Luxury Navigation */}
       <LuxuryNavbar locale={locale} />
 
-      <main className="flex-1 space-y-14 sm:space-y-20 pb-28 md:pb-24">
+      <main className="flex-1 pb-28 md:pb-24">
         {/* ==================================================================== */}
-        {/* 1. HERO — LIVE ALLOCATION BOARD                                      */}
+        {/* 1. HERO — RELAXED RED SEA VIDEO HERO                                */}
         {/* ==================================================================== */}
-        <HeroAllocation locale={locale} />
+        <RelaxedVideoHero locale={locale} />
 
         {/* ==================================================================== */}
-        {/* 2. TWO-SPEED VERTICALS — fast lane cart, slow lane concierge         */}
+        {/* 2. TWO-SPEED VERTICALS — full-screen experience showcase             */}
         {/* ==================================================================== */}
         <TwoSpeedVerticals locale={locale} />
 
         {/* ==================================================================== */}
-        {/* 2b. STICKY CATALOG FILTER — search lives where the results are        */}
+        {/* 3. RELAXED CATALOG & SHOWCASE SECTION                                */}
         {/* ==================================================================== */}
-        <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
+        <div className="relative py-12 sm:py-16 bg-gradient-to-b from-[#EBF2F7] via-[#E4EDF3] to-[#DAE5EC] dark:from-[#040C0E] dark:via-[#061820] dark:to-[#040E14] transition-colors space-y-16 sm:space-y-20">
+          {/* Floating Filter Bar */}
           <CatalogFilterBar
             locale={locale}
             filters={filters}
             onChange={setFilters}
             resultCount={filteredProducts.length}
           />
-        </div>
 
-        {isFiltering && (
-          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-live="polite">
-            {filteredProducts.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {filteredProducts.map((product) => (
-                  <ProductCard key={product.id} product={product} locale={locale} />
-                ))}
-              </div>
-            ) : (
-              <div className="rounded-3xl border border-dashed border-slate-300 dark:border-white/15 p-10 text-center">
-                <p className="text-base font-bold text-slate-900 dark:text-white">
-                  {isArabic ? 'لا توجد تجربة مطابقة' : 'Nothing matches those filters'}
-                </p>
-                <p className="mt-1.5 text-sm text-slate-500 dark:text-slate-400">
-                  {isArabic
-                    ? 'جرّب توسيع الموقع أو الفئة.'
-                    : 'Try widening the location or category.'}
-                </p>
-                <button
-                  type="button"
-                  onClick={() => setFilters(EMPTY_FILTERS)}
-                  className="mt-4 inline-flex items-center rounded-xl bg-slate-900 dark:bg-white px-4 py-2 text-xs font-black text-white dark:text-slate-900 cursor-pointer"
-                >
-                  {isArabic ? 'مسح عوامل التصفية' : 'Clear filters'}
-                </button>
-              </div>
-            )}
-          </section>
-        )}
-
-        {!isFiltering && (
-        <>
-        {/* ==================================================================== */}
-        {/* 3. SHOWCASE: UPCOMING EVENTS & CONCERTS */}
-        {/* ==================================================================== */}
-        <section id="events" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 scroll-mt-24">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
-            <div>
-              <div className="flex items-center gap-2 text-[#b8860b] dark:text-[#D4AF37] text-xs font-extrabold uppercase tracking-widest">
-                <Flame className="w-4 h-4" />
-                <span>{isArabic ? 'حفلات وأمسيات حية' : 'Live Shoreline Performances'}</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">
-                {isArabic ? 'أبرز الفعاليات والحفلات القادمة' : 'Upcoming Coastal Concerts & Festivals'}
-              </h2>
-            </div>
-            <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
-              {isArabic ? 'تحديث فوري لتوفر المقاعد وتذاكر VIP' : 'Real-time tier scarcity & instant ticketing'}
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-            {eventsList.map((event) => (
-              <ProductCard key={event.id} product={event} locale={locale} />
-            ))}
-          </div>
-        </section>
-
-        {/* ==================================================================== */}
-        {/* 4. SHOWCASE: EXCLUSIVE SEA VOYAGES & CHARTERS */}
-        {/* ==================================================================== */}
-        <section id="voyages" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 scroll-mt-24">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
-            <div>
-              <div className="flex items-center gap-2 text-sky-600 dark:text-sky-400 text-xs font-extrabold uppercase tracking-widest">
-                <Anchor className="w-4 h-4" />
-                <span>{isArabic ? 'الإبحار واليخوت الفاخرة' : 'Certified Maritime Fleet'}</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">
-                {isArabic ? 'الرحلات البحرية وتأجير اليخوت الخاصة' : 'Exclusive Red Sea Voyages & Yacht Charters'}
-              </h2>
-            </div>
-            <div className="flex flex-col sm:items-end gap-2">
-              {/* Sea state belongs where it changes the buying decision */}
-              <WeatherMaritimeWidget locale={locale} />
-              <div className="flex items-center gap-2 text-xs font-semibold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-500/20 px-3 py-1.5 rounded-full">
-                <ShieldCheck className="w-4 h-4" />
-                <span>{isArabic ? 'تصاريح فورية لحرس الحدود' : 'Saudi Coast Guard Pre-Cleared'}</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-            {voyagesList.map((voyage) => (
-              <ProductCard key={voyage.id} product={voyage} locale={locale} />
-            ))}
-          </div>
-        </section>
-
-        {/* ==================================================================== */}
-        {/* 5. SHOWCASE: BEACH DAY PASSES & CABANAS */}
-        {/* ==================================================================== */}
-        <section id="day-passes" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 scroll-mt-24">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-            <div>
-              <div className="flex items-center gap-2 text-cyan-600 dark:text-cyan-400 text-xs font-extrabold uppercase tracking-widest">
-                <Sparkles className="w-4 h-4" />
-                <span>{isArabic ? 'شواطئ واستجمام خاص' : 'Day Retreats & Daybeds'}</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">
-                {isArabic ? 'تصاريح الشواطئ الخاصة والكابانات' : 'Beach Day Passes & Private Cabanas'}
-              </h2>
-            </div>
-
-            {/* Privacy Category Filter Pill Switcher */}
-            <div className="flex items-center gap-2 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-1.5 rounded-2xl">
-              {[
-                { id: 'all', labelEn: 'All Beaches', labelAr: 'الكل' },
-                { id: 'ladies_only', labelEn: 'Ladies-Only 100%', labelAr: 'سيدات فقط' },
-                { id: 'family', labelEn: 'Family Pergolas', labelAr: 'عائلات' },
-              ].map((btn) => (
-                <button
-                  key={btn.id}
-                  onClick={() => setDayPassPrivacyFilter(btn.id as 'all' | 'ladies_only' | 'family')}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
-                    dayPassPrivacyFilter === btn.id
-                      ? 'bg-cyan-500 text-slate-950 shadow-md'
-                      : 'text-slate-600 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white'
-                  }`}
-                >
-                  {isArabic ? btn.labelAr : btn.labelEn}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-            {dayPassesList.map((pass) => (
-              <ProductCard key={pass.id} product={pass} locale={locale} />
-            ))}
-          </div>
-        </section>
-
-        {/* ==================================================================== */}
-        {/* 6. SHOWCASE: VIP MEMBERSHIPS & BEACHFRONT REAL ESTATE */}
-        {/* ==================================================================== */}
-        <section id="real-estate" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 scroll-mt-24">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
-            <div>
-              <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 text-xs font-extrabold uppercase tracking-widest">
-                <Home className="w-4 h-4" />
-                <span>{isArabic ? 'أصول النخبة الساحلية' : 'Prime Coastal Assets'}</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">
-                {isArabic ? 'العضويات والعقود السنوية' : 'VIP Memberships & Chalet Leases'}
-              </h2>
-            </div>
-            <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
-              {isArabic ? 'تشمل مراسي القوارب والكونسيرج 24/7' : 'Includes private yacht berths & 24/7 concierge'}
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-            {realEstateList.map((property) => (
-              <ProductCard key={property.id} product={property} locale={locale} />
-            ))}
-          </div>
-        </section>
-
-        </>
-        )}
-
-        {/* ==================================================================== */}
-        {/* 7. SOCIAL PROOF & SAUDI LOCALIZATION BANNER */}
-        {/* ==================================================================== */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12">
-          <div className="rounded-3xl bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 dark:from-[#071E26] dark:via-[#092B37] dark:to-[#071E26] border border-[#b8860b]/40 dark:border-[#D4AF37]/30 p-8 lg:p-12 shadow-2xl relative overflow-hidden text-white">
-            <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-              <div className="md:col-span-2 space-y-4">
-                <span className="text-xs font-black uppercase tracking-widest text-[#D4AF37]">
-                  {isArabic ? 'التميز في الضيافة السعودية' : 'The Benchmark of Saudi Hospitality'}
-                </span>
-                <h3 className="text-2xl sm:text-3xl font-bold text-white">
-                  {isArabic
-                    ? 'تجارب ساحلية استثنائية صُممت لراحتك وفق أعلى المعايير'
-                    : 'Tailored Red Sea Experiences With Seamless 1-Click Verification'}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-light">
-                  {isArabic
-                    ? 'من تأكيد تصريح حرس الحدود الفوري إلى إصدار التذاكر المشفرة ومطابقة الفاتورة الضريبية ZATCA، نضمن لك ولعائلتك تجربة خالية من أي تعقيد.'
-                    : 'From instant Coast Guard port manifests to encrypted gate QR passes and ZATCA Phase 2 tax transparency, we deliver effortless luxury.'}
-                </p>
-                <div className="flex flex-wrap gap-4 pt-2">
-                  <div className="flex items-center gap-2 text-xs font-semibold text-white">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                    <span>Mada, Apple Pay & STC Pay</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-xs font-semibold text-white">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                    <span>15% ZATCA Compliant Invoice</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-xs font-semibold text-white">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                    <span>24/7 VIP Red Sea Concierge</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Verified Trust Stats */}
-              <div className="p-6 rounded-2xl bg-black/40 border border-white/10 text-center space-y-4">
-                <div>
-                  <span className="text-3xl font-black text-[#D4AF37]">4.97 / 5</span>
-                  <div className="flex justify-center gap-1 mt-1 text-amber-400">
-                    {[1, 2, 3, 4, 5].map((s) => (
-                      <Star key={s} className="w-4 h-4 fill-amber-400" />
+          {isFiltering && (
+            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-live="polite">
+              {filteredProducts.length > 0 ? (
+                <div className="space-y-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                    {filteredProducts.map((product) => (
+                      <ProductCard key={product.id} product={product} locale={locale} />
                     ))}
                   </div>
-                  <p className="text-[11px] text-slate-300 mt-1">Based on 1,200+ Verified Guests in 2026</p>
+
+                  <div className="flex justify-center pt-4">
+                    <button
+                      type="button"
+                      onClick={() => setFilters(EMPTY_FILTERS)}
+                      className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-950 font-semibold text-xs shadow-md hover:scale-105 transition-all cursor-pointer"
+                    >
+                      <span>{isArabic ? 'عرض كل التجارب' : 'View All Experiences'}</span>
+                    </button>
+                  </div>
                 </div>
-                <div className="border-t border-white/10 pt-3">
-                  <p className="text-xs font-bold text-white">Certified Maritime Fleet</p>
-                  <p className="text-[11px] text-slate-300">Licensed under Saudi Tourism Authority</p>
+              ) : (
+                <div className="rounded-3xl border border-dashed border-slate-300 dark:border-white/15 p-10 text-center">
+                  <p className="text-base font-bold text-slate-900 dark:text-white">
+                    {isArabic ? 'لا توجد تجربة مطابقة' : 'Nothing matches those filters'}
+                  </p>
+                  <p className="mt-1.5 text-sm text-slate-500 dark:text-slate-400">
+                    {isArabic ? 'جرّب البحث بكلمات أخرى.' : 'Try another search keyword.'}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setFilters(EMPTY_FILTERS)}
+                    className="mt-4 inline-flex items-center rounded-xl bg-slate-900 dark:bg-white px-4 py-2 text-xs font-black text-white dark:text-slate-900 cursor-pointer"
+                  >
+                    {isArabic ? 'عرض الكل' : 'View all'}
+                  </button>
                 </div>
-              </div>
-            </div>
-          </div>
-        </section>
+              )}
+            </section>
+          )}
+
+          {!isFiltering && (
+            <>
+              {/* ==================================================================== */}
+              {/* 3a. SHOWCASE: EVENTS & CONCERTS (فعاليات)                            */}
+              {/* ==================================================================== */}
+              <section id="events" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-28">
+                <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+                  <div>
+                    <div className="flex items-center gap-2 text-[#b8860b] dark:text-[#D4AF37] text-xs font-bold uppercase tracking-widest">
+                      <Flame className="w-4 h-4" />
+                      <span>{isArabic ? 'فعاليات وأمسيات' : 'Shoreline Concerts'}</span>
+                    </div>
+                    <h2 className="text-2xl sm:text-3xl font-light text-slate-900 dark:text-white mt-1">
+                      {isArabic ? (
+                        <>
+                          أبرز <span className="font-medium text-[#b8860b] dark:text-[#F5D982]">الفعاليات والحفلات</span>
+                        </>
+                      ) : (
+                        <>
+                          Featured <span className="font-medium italic font-serif">Concerts & Festivals</span>
+                        </>
+                      )}
+                    </h2>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                  {eventsList.slice(0, 3).map((event) => (
+                    <ProductCard key={event.id} product={event} locale={locale} />
+                  ))}
+                </div>
+
+                {/* View All Events */}
+                <div className="flex justify-center pt-8">
+                  <Link
+                    href={`/${locale}/events`}
+                    className="group inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white/80 dark:bg-white/10 hover:bg-white dark:hover:bg-white/20 border border-slate-200 dark:border-white/15 text-slate-800 dark:text-white text-xs font-semibold shadow-sm hover:shadow-md transition-all cursor-pointer"
+                  >
+                    <span>{isArabic ? 'عرض جميع الفعاليات' : 'View All Events'}</span>
+                    <Star className="w-3 h-3 text-[#D4AF37] group-hover:rotate-45 transition-transform" />
+                  </Link>
+                </div>
+              </section>
+
+              {/* ==================================================================== */}
+              {/* 3b. SHOWCASE: SEA VOYAGES & CHARTERS (رحلات)                         */}
+              {/* ==================================================================== */}
+              <section id="voyages" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-28">
+                <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+                  <div>
+                    <div className="flex items-center gap-2 text-sky-600 dark:text-sky-400 text-xs font-bold uppercase tracking-widest">
+                      <Anchor className="w-4 h-4" />
+                      <span>{isArabic ? 'رحلات بحرية ويخوت' : 'Maritime Fleet'}</span>
+                    </div>
+                    <h2 className="text-2xl sm:text-3xl font-light text-slate-900 dark:text-white mt-1">
+                      {isArabic ? (
+                        <>
+                          رحلات <span className="font-medium text-sky-600 dark:text-sky-400">اليخوت الخاصة</span>
+                        </>
+                      ) : (
+                        <>
+                          Exclusive <span className="font-medium italic font-serif">Red Sea Voyages</span>
+                        </>
+                      )}
+                    </h2>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <WeatherMaritimeWidget locale={locale} />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                  {voyagesList.slice(0, 3).map((voyage) => (
+                    <ProductCard key={voyage.id} product={voyage} locale={locale} />
+                  ))}
+                </div>
+
+                {/* View All Voyages */}
+                <div className="flex justify-center pt-8">
+                  <Link
+                    href={`/${locale}/voyages`}
+                    className="group inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white/80 dark:bg-white/10 hover:bg-white dark:hover:bg-white/20 border border-slate-200 dark:border-white/15 text-slate-800 dark:text-white text-xs font-semibold shadow-sm hover:shadow-md transition-all cursor-pointer"
+                  >
+                    <span>{isArabic ? 'عرض جميع الرحلات' : 'View All Voyages'}</span>
+                    <Anchor className="w-3 h-3 text-sky-400 group-hover:translate-y-0.5 transition-transform" />
+                  </Link>
+                </div>
+              </section>
+
+              {/* ==================================================================== */}
+              {/* 3c. SHOWCASE: VIP MEMBERSHIPS & REAL ESTATE (عضويات)                 */}
+              {/* ==================================================================== */}
+              <section id="real-estate" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-28">
+                <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+                  <div>
+                    <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-widest">
+                      <Home className="w-4 h-4" />
+                      <span>{isArabic ? 'عضويات وشاليهات' : 'VIP Memberships'}</span>
+                    </div>
+                    <h2 className="text-2xl sm:text-3xl font-light text-slate-900 dark:text-white mt-1">
+                      {isArabic ? (
+                        <>
+                           تذاكر الدخول <span className="font-medium text-emerald-600 dark:text-emerald-400">والعضويات</span>
+                        </>
+                      ) : (
+                        <>
+                          Exclusive <span className="font-medium italic font-serif">Memberships</span>
+                        </>
+                      )}
+                    </h2>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                  {realEstateList.slice(0, 3).map((property) => (
+                    <ProductCard key={property.id} product={property} locale={locale} />
+                  ))}
+                </div>
+
+                {/* View All Memberships */}
+                <div className="flex justify-center pt-8">
+                  <Link
+                    href={`/${locale}/memberships`}
+                    className="group inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white/80 dark:bg-white/10 hover:bg-white dark:hover:bg-white/20 border border-slate-200 dark:border-white/15 text-slate-800 dark:text-white text-xs font-semibold shadow-sm hover:shadow-md transition-all cursor-pointer"
+                  >
+                    <span>{isArabic ? 'عرض جميع العضويات' : 'View All Memberships'}</span>
+                    <Sparkles className="w-3 h-3 text-[#D4AF37] group-hover:scale-110 transition-transform" />
+                  </Link>
+                </div>
+              </section>
+            </>
+          )}
+        </div>
+
       </main>
 
       {/* Global 3-Step Checkout Modal Controller */}

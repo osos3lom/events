@@ -83,7 +83,7 @@ export function RealEstatePurchase({ product, locale = 'en' }: RealEstatePurchas
               <div className="p-3 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5">
                 <span className="text-slate-500 dark:text-slate-400 block text-[10px] uppercase font-semibold">Security Deposit</span>
                 <span className="font-bold text-slate-900 dark:text-white mt-0.5 inline-flex items-center gap-1">
-                  <span>{specs.securityDeposit.toLocaleString()}</span>
+                  <span>{(specs.securityDeposit ?? 0).toLocaleString()}</span>
                   <SaudiRiyalSymbol size="xs" />
                 </span>
               </div>
@@ -91,7 +91,7 @@ export function RealEstatePurchase({ product, locale = 'en' }: RealEstatePurchas
 
             {/* Amenities List */}
             <div className="pt-2 border-t border-slate-100 dark:border-white/10 grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs text-slate-700 dark:text-slate-300">
-              {specs.amenities.map((item, i) => (
+              {(specs.amenities || []).map((item, i) => (
                 <div key={i} className="flex items-center gap-2">
                   <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
                   <span>{item[isArabic ? 'ar' : 'en']}</span>
