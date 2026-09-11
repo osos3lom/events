@@ -1,4 +1,5 @@
 import { LuxuryProduct } from '../types/booking';
+import { asset } from '@/lib/basePath';
 
 export const luxuryCatalog: LuxuryProduct[] = [
   // ==========================================
@@ -206,7 +207,7 @@ export const luxuryCatalog: LuxuryProduct[] = [
       ar: 'شعاب بياضة (الانطلاق من مرسى الأحلام)',
     },
     marinaOrArea: 'north_obhur',
-    coverImage: '/images/bayadha.png',
+    coverImage: asset('/images/bayadha.png'),
     galleryImages: [
       'https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=1200&auto=format&fit=crop&q=80',
     ],
@@ -227,6 +228,12 @@ export const luxuryCatalog: LuxuryProduct[] = [
       guestCapacity: 20,
       crewCount: 3,
       captainName: 'Capt. Tariq Al-Ghamdi',
+      amenities: [
+        { en: 'Shaded Trampoline Lounge & Sun Deck', ar: 'منطقة استرخاء مظللة وسطح شمسي' },
+        { en: 'Snorkelling Gear & Paddleboards Onboard', ar: 'معدات غطس وألواح تجديف على متن اليخت' },
+        { en: 'Chilled Seafood Lunch & Refreshments', ar: 'غداء بحري بارد ومشروبات منعشة' },
+        { en: 'Freshwater Deck Shower & Changing Room', ar: 'دش مياه عذبة وغرفة تبديل ملابس' },
+      ],
     },
     tiers: [
       {
@@ -266,9 +273,9 @@ export const luxuryCatalog: LuxuryProduct[] = [
       ar: 'مارينا نادي اليخوت، أبحر',
     },  
     marinaOrArea: 'jeddah_yacht_club',
-    coverImage: '/images/obhur-sunset-yacht-dj.jpg',
+    coverImage: asset('/images/obhur-sunset-yacht-dj.jpg'),
     galleryImages: [
-      '/images/azimut-yacht-main.jpg',
+      asset('/images/azimut-yacht-main.jpg'),
     ],
     basePrice: 2400,
     currency: 'SAR',
@@ -287,6 +294,12 @@ export const luxuryCatalog: LuxuryProduct[] = [
       guestCapacity: 12,
       crewCount: 2,
       captainName: 'Capt. Faisal Al-Zahrani',
+      amenities: [
+        { en: 'Private Flybridge & Sunset Seating', ar: 'سطح علوي خاص وجلسات لمشاهدة الغروب' },
+        { en: 'Arabic Coffee, Dates & Canapé Service', ar: 'قهوة عربية وتمور وضيافة خفيفة' },
+        { en: 'Onboard Sound System & Mood Lighting', ar: 'نظام صوتي وإضاءة مخصصة على متن اليخت' },
+        { en: 'Dedicated Crew & Marina Valet Parking', ar: 'طاقم مخصص وخدمة صف السيارات في المارينا' },
+      ],
     },
     tiers: [
       {
@@ -329,9 +342,9 @@ export const luxuryCatalog: LuxuryProduct[] = [
       ar: 'شاطئ ونادي أويا، أبحر الشمالية',
     },
     marinaOrArea: 'north_obhur',
-    coverImage: '/images/oia-beach-cabana-gallery.jpg',
+    coverImage: asset('/images/oia-beach-cabana-gallery.jpg'),
     galleryImages: [
-      '/images/oia-beach-sunbed-cover.jpg',
+      asset('/images/oia-beach-sunbed-cover.jpg'),
     ],
     basePrice: 1200,
     currency: 'SAR',
@@ -396,7 +409,7 @@ export const luxuryCatalog: LuxuryProduct[] = [
       ar: 'في جميع مرافق ومنتجعات البحر الأحمر، جدة',
     },
     marinaOrArea: 'south_obhur',
-    coverImage: '/images/azimut-yacht-interior.jpg',
+    coverImage: asset('/images/azimut-yacht-interior.jpg'),
     galleryImages: [
       'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&auto=format&fit=crop&q=80',
     ],

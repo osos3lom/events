@@ -10,6 +10,7 @@ import { ThemeToggle } from '../../../../components/common/ThemeToggle';
 import { getLocalizedText, formatCurrency } from '../../../../lib/localeUtils';
 import { validateSaudiCustomer, formatSaudiPhoneNumber, SaudiIdentityType } from '../../../../lib/validation/checkoutValidation';
 import { SaudiRiyalSymbol } from '../../../../components/common/SaudiRiyalSymbol';
+import { asset } from '@/lib/basePath';
 import {
   Ticket,
   User,
@@ -256,7 +257,7 @@ export default function CheckoutPage() {
 
           <div className="flex items-center gap-2">
             <div className="w-7 h-7 rounded-lg bg-slate-100 dark:bg-white/10 border border-slate-200 dark:border-white/10 flex items-center justify-center p-0.5 shadow-xs shrink-0">
-              <img src="/brand/logo-icon.png" alt="jeddah Events" className="w-full h-full object-contain" />
+              <img src={asset('/brand/logo-icon.png')} alt="jeddah Events" className="w-full h-full object-contain" />
             </div>
             <span className="font-bold text-sm tracking-tight line-clamp-1">{eventTitle}</span>
           </div>

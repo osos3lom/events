@@ -1,4 +1,5 @@
 import { AppDataState } from '../types';
+import { asset } from '@/lib/basePath';
 
 export const initialData: AppDataState = {
   user: {
@@ -74,7 +75,7 @@ Dress Code: Coastal Chic / White & Marine Blue Linen.`,
         ar: 'طريق الكورنيش، حي الشاطئ، جدة 23613، المملكة العربية السعودية'
       },
       online_details: '',
-      cover_image_url: '/images/obhur-sunset-yacht-dj.jpg',
+      cover_image_url: asset('/images/obhur-sunset-yacht-dj.jpg'),
       organizer_id: 'org-jeddah-marina',
       organizer_name: {
         en: 'Red Sea Marine & Coastal Experiences',
@@ -194,7 +195,7 @@ Event Highlights:
         ar: 'شارع الأمير عبد الله الفيصل، أبحر الشمالية، جدة 23812'
       },
       online_details: '',
-      cover_image_url: '/images/oia-beach-sunbed-cover.jpg',
+      cover_image_url: asset('/images/oia-beach-sunbed-cover.jpg'),
       organizer_id: 'org-jeddah-marina',
       organizer_name: {
         en: 'Red Sea Marine & Coastal Experiences',

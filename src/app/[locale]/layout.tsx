@@ -9,6 +9,7 @@ import { DataProvider } from '../../context/DataContext';
 import { BookingProvider } from '../../lib/bookingStore';
 import { ThemeProvider } from '../../components/providers/ThemeProvider';
 import '../globals.css';
+import { asset } from '@/lib/basePath';
 
 const outfit = Outfit({
   subsets: ['latin'],
@@ -43,13 +44,13 @@ export const metadata: Metadata = {
   description: 'Premier Jeddah Red Sea luxury coastal experiences, ticketed events, private beach day passes, and yacht charters.',
   icons: {
     icon: [
-      { url: '/favicon.ico' },
-      { url: '/brand/logo-icon.png', sizes: '32x32', type: 'image/png' },
+      { url: asset('/favicon.ico') },
+      { url: asset('/brand/logo-icon.png'), sizes: '32x32', type: 'image/png' },
     ],
     apple: [
-      { url: '/brand/logo-icon.png', sizes: '180x180', type: 'image/png' },
+      { url: asset('/brand/logo-icon.png'), sizes: '180x180', type: 'image/png' },
     ],
-    shortcut: '/favicon.ico',
+    shortcut: asset('/favicon.ico'),
   },
 };
 

@@ -33,6 +33,7 @@ import { useBookingStore } from '../../lib/bookingStore';
 import { SaudiIdentityType, ServiceCategory } from '../../types/booking';
 import { validateSaudiCustomer, formatSaudiPhoneNumber } from '../../lib/validation/checkoutValidation';
 import { SaudiRiyalSymbol } from '../common/SaudiRiyalSymbol';
+import { asset } from '@/lib/basePath';
 
 interface UnifiedCheckoutModalProps {
   locale?: string;
@@ -964,12 +965,12 @@ export function UnifiedCheckoutModal({
                 </span>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2.5">
                   {[
-                    { id: 'mada', label: 'Mada', logo: '/payments/Mada_Logo.png' },
-                    { id: 'apple_pay', label: 'Apple Pay', logo: '/payments/Apple_Pay.png' },
-                    { id: 'stc_pay', label: 'STC Pay', logo: '/payments/Stc_pay.png' },
-                    { id: 'credit_card', label: 'Visa / MC', logo: '/payments/Visa_Logo.png' },
-                    { id: 'tamara', label: 'Tamara', logo: '/payments/taamara.png' },
-                    { id: 'tabby', label: 'Tabby', logo: '/payments/tabby-logo.png' },
+                    { id: 'mada', label: 'Mada', logo: asset('/payments/Mada_Logo.png') },
+                    { id: 'apple_pay', label: 'Apple Pay', logo: asset('/payments/Apple_Pay.png') },
+                    { id: 'stc_pay', label: 'STC Pay', logo: asset('/payments/Stc_pay.png') },
+                    { id: 'credit_card', label: 'Visa / MC', logo: asset('/payments/Visa_Logo.png') },
+                    { id: 'tamara', label: 'Tamara', logo: asset('/payments/taamara.png') },
+                    { id: 'tabby', label: 'Tabby', logo: asset('/payments/tabby-logo.png') },
                   ].map((method) => {
                     const isSelected = state.paymentMethod === method.id;
                     return (
@@ -1113,7 +1114,7 @@ export function UnifiedCheckoutModal({
               {/* Official Digital Gate Pass Card */}
               <div className="max-w-md mx-auto p-6 rounded-3xl bg-white text-slate-900 shadow-2xl border border-slate-200 text-center space-y-4">
                 <div className="border-b border-slate-200 pb-3 flex flex-col items-center">
-                  <img src="/brand/logo-icon.png" alt="jeddah Events" className="w-10 h-10 object-contain mb-1.5" />
+                  <img src={asset('/brand/logo-icon.png')} alt="jeddah Events" className="w-10 h-10 object-contain mb-1.5" />
                   <span className="text-[10px] font-bold tracking-widest text-cyan-800 uppercase block">
                     RED SEA LUXURY EXPERIENCES • OFFICIAL PASS
                   </span>

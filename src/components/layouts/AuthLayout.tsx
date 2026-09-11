@@ -6,6 +6,7 @@ import { DemoResetButton } from '../common/DemoResetButton';
 import { ThemeToggle } from '../common/ThemeToggle';
 import { Link } from '../../i18n/routing';
 import { QrCode } from 'lucide-react';
+import { asset } from '@/lib/basePath';
 
 export const AuthLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
@@ -16,7 +17,7 @@ export const AuthLayout: React.FC<{ children: React.ReactNode }> = ({ children }
         <div className="flex items-center justify-between w-full">
           <Link href="/manage/events" className="flex items-center gap-2.5 group">
             <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center p-1 shadow-xs group-hover:scale-105 transition shrink-0">
-              <img src="/brand/logo-icon.png" alt="jeddah Events" className="w-full h-full object-contain" />
+              <img src={asset('/brand/logo-icon.png')} alt="jeddah Events" className="w-full h-full object-contain" />
             </div>
             <div className="flex flex-col">
               <span className="font-extrabold text-foreground tracking-tight text-lg leading-none">

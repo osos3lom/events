@@ -29,8 +29,49 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Deployment (GitHub Pages)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The demo is published to GitHub Pages by `.github/workflows/deploy.yml` on every
+push to `main`, and can also be run manually from the Actions tab.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Live URL: **https://osos3lom.github.io/events/**
+
+The app is a fully static export (`output: 'export'`) with no backend — all demo
+state lives in `localStorage`, so it runs anywhere that serves static files.
+
+### Base path
+
+A GitHub Pages *project* site is served from `<user>.github.io/<repo>`, not the
+domain root, so the build needs a path prefix. The workflow sets it from the repo
+name:
+
+```
+NEXT_PUBLIC_BASE_PATH=/events npm run build
+```
+
+`next/link` applies this automatically. Raw `<img>`, `<video>` and any asset path
+stored in data must be wrapped with `asset()` from `src/lib/basePath.ts`:
+
+```tsx
+import { asset } from '@/lib/basePath';
+
+<img src={asset('/brand/logo-icon.png')} />
+```
+
+Leaving `NEXT_PUBLIC_BASE_PATH` unset (as in `npm run dev`) yields an empty
+prefix, so local development and root-domain hosting both work unchanged.
+
+### Moving to a custom domain
+
+Serving from a domain root removes the prefix entirely: add a `CNAME` file to
+`public/`, point DNS at GitHub Pages, and drop the `NEXT_PUBLIC_BASE_PATH` env
+line from the workflow.
+
+### Notes
+
+- `public/.nojekyll` stops Pages from stripping the `_next/` directory.
+- `trailingSlash: true` emits `en/index.html`, so both `/en` and `/en/` resolve
+  on a host with no rewrite rules.
+- `src/middleware.ts` (next-intl locale negotiation) only runs under `next dev`;
+  static hosts cannot execute middleware, so `/` is handled by the redirect
+  document in `src/app/page.tsx`.

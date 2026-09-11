@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { ArrowRight, ChevronDown } from 'lucide-react';
+import { asset } from '@/lib/basePath';
 
 interface RelaxedVideoHeroProps {
   locale: string;
@@ -82,7 +83,7 @@ export function RelaxedVideoHero({ locale }: RelaxedVideoHeroProps) {
           playsInline
           className="w-full h-full object-cover object-center"
         >
-          <source src="/bgvideo.mp4" type="video/mp4" />
+          <source src={asset('/bgvideo.mp4')} type="video/mp4" />
         </video>
 
         {/* Soft tranquil ocean tint with light shadow and seamless bottom blend */}

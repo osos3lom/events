@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { asset } from '@/lib/basePath';
 
 interface TwoSpeedVerticalsProps {
   locale: string;
@@ -74,7 +75,7 @@ export function TwoSpeedVerticals({ locale }: TwoSpeedVerticalsProps) {
           playsInline
           className="w-full h-full object-cover object-center"
         >
-          <source src="/experiance.mp4" type="video/mp4" />
+          <source src={asset('/experiance.mp4')} type="video/mp4" />
         </video>
 
         {/* Shadow overlays blending seamlessly with hero above */}

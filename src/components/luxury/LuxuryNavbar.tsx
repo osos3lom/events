@@ -6,6 +6,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { Compass, ShoppingBag, Sparkles, Anchor, Ticket, Home, Globe, PhoneCall, Shield, ArrowRight } from 'lucide-react';
 import { useBookingStore } from '../../lib/bookingStore';
 import { ThemeToggle } from '../common/ThemeToggle';
+import { asset } from '@/lib/basePath';
 
 interface LuxuryNavbarProps {
   locale?: string;
@@ -62,7 +63,7 @@ export function LuxuryNavbar({ locale = 'en', onOpenCart }: LuxuryNavbarProps) {
           <Link href={`/${locale}`} className="flex items-center gap-2.5 sm:gap-3 group shrink-0">
             <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-tr from-cyan-500/15 via-sky-500/20 to-teal-500/15 dark:bg-white/10 border border-white/60 dark:border-white/20 flex items-center justify-center p-1 shadow-xs group-hover:scale-105 transition-transform">
               <img
-                src="/brand/logo-icon.png"
+                src={asset('/brand/logo-icon.png')}
                 alt="Jeddah Sea Events"
                 className="w-full h-full object-contain drop-shadow"
               />

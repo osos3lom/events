@@ -15,6 +15,7 @@ import {
   User
 } from '../types';
 import { initialData } from '../data/initialData';
+import { asset } from '@/lib/basePath';
 
 const STORAGE_KEY = 'hi_events_redsea_jeddah_v3';
 
@@ -62,10 +63,10 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         // Migrate any outdated image URLs
         const migratedEvents = parsed.events.map((ev) => {
           if (ev.id === '1' || ev.cover_image_url?.includes('photo-1569263979104-865ab7cd8d17')) {
-            return { ...ev, cover_image_url: '/images/obhur-sunset-yacht-dj.jpg' };
+            return { ...ev, cover_image_url: asset('/images/obhur-sunset-yacht-dj.jpg') };
           }
           if (ev.id === '3' || ev.cover_image_url?.includes('photo-1510812431401-41d2bd2722f3')) {
-            return { ...ev, cover_image_url: '/images/oia-beach-sunbed-cover.jpg' };
+            return { ...ev, cover_image_url: asset('/images/oia-beach-sunbed-cover.jpg') };
           }
           return ev;
         });

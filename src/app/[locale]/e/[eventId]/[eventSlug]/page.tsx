@@ -10,6 +10,7 @@ import { ThemeToggle } from '../../../../../components/common/ThemeToggle';
 import { DemoResetButton } from '../../../../../components/common/DemoResetButton';
 import { Badge } from '../../../../../components/common/Badge';
 import { getLocalizedText, formatEventDate, formatEventTime, formatCurrency } from '../../../../../lib/localeUtils';
+import { asset } from '@/lib/basePath';
 import {
   Calendar,
   Clock,
@@ -80,7 +81,7 @@ export default function PublicEventPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <Link href="/manage/events" className="flex items-center gap-2.5 group">
             <div className="w-8 h-8 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center p-0.5 shadow-xs shrink-0">
-              <img src="/brand/logo-icon.png" alt="jeddah Events" className="w-full h-full object-contain" />
+              <img src={asset('/brand/logo-icon.png')} alt="jeddah Events" className="w-full h-full object-contain" />
             </div>
             <span className="font-bold text-slate-900 dark:text-white tracking-tight text-base">
               jeddah Events
@@ -104,10 +105,10 @@ export default function PublicEventPage() {
       {/* Main Hero Banner */}
       <div className="relative w-full h-72 sm:h-96 bg-slate-900 overflow-hidden">
         <img
-          src={event.cover_image_url || '/images/obhur-sunset-yacht-dj.jpg'}
+          src={event.cover_image_url || asset('/images/obhur-sunset-yacht-dj.jpg')}
           alt={title}
           onError={(e) => {
-            e.currentTarget.src = '/images/obhur-sunset-yacht-dj.jpg';
+            e.currentTarget.src = asset('/images/obhur-sunset-yacht-dj.jpg');
           }}
           className="w-full h-full object-cover opacity-60"
         />

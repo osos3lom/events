@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Anchor, ShieldCheck, MapPin, Phone, Mail, Award, CheckCircle2 } from 'lucide-react';
+import { asset } from '@/lib/basePath';
 
 export function LuxuryFooter({ locale = 'en' }: { locale?: string }) {
   const isArabic = locale === 'ar';
@@ -60,7 +61,7 @@ export function LuxuryFooter({ locale = 'en' }: { locale?: string }) {
         <div className="space-y-3">
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500/10 via-sky-500/20 to-teal-500/10 dark:bg-white/5 border border-cyan-500/20 dark:border-white/10 flex items-center justify-center p-1 shrink-0">
-              <img src="/brand/logo-icon.png" alt="jeddah Events" className="w-full h-full object-contain" />
+              <img src={asset('/brand/logo-icon.png')} alt="jeddah Events" className="w-full h-full object-contain" />
             </div>
             <span className="font-extrabold text-sm text-slate-900 dark:text-white tracking-wider">
               {isArabic ? 'فعاليات' : 'jeddah EVENTS'}
@@ -114,13 +115,13 @@ export function LuxuryFooter({ locale = 'en' }: { locale?: string }) {
           </h4>
           <div className="flex flex-wrap items-center gap-2 mb-4">
             {[
-              { name: 'Mada', src: '/payments/Mada_Logo.png' },
-              { name: 'Apple Pay', src: '/payments/Apple_Pay.png' },
-              { name: 'Visa', src: '/payments/Visa_Logo.png' },
-              { name: 'Mastercard', src: '/payments/Mastercard-Logo.png' },
-              { name: 'STC Pay', src: '/payments/Stc_pay.png' },
-              { name: 'Tamara', src: '/payments/taamara.png' },
-              { name: 'Tabby', src: '/payments/tabby-logo.png' },
+              { name: 'Mada', src: asset('/payments/Mada_Logo.png') },
+              { name: 'Apple Pay', src: asset('/payments/Apple_Pay.png') },
+              { name: 'Visa', src: asset('/payments/Visa_Logo.png') },
+              { name: 'Mastercard', src: asset('/payments/Mastercard-Logo.png') },
+              { name: 'STC Pay', src: asset('/payments/Stc_pay.png') },
+              { name: 'Tamara', src: asset('/payments/taamara.png') },
+              { name: 'Tabby', src: asset('/payments/tabby-logo.png') },
             ].map((p) => (
               <div
                 key={p.name}

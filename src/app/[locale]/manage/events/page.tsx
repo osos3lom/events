@@ -8,6 +8,7 @@ import { Event, EventFormat, EventStatus } from '../../../../types';
 import { Badge } from '../../../../components/common/Badge';
 import { Modal } from '../../../../components/common/Modal';
 import { getLocalizedText, formatEventDate, formatCurrency, generateSlug } from '../../../../lib/localeUtils';
+import { asset } from '@/lib/basePath';
 import {
   Plus,
   Search,
@@ -225,10 +226,10 @@ export default function EventsManagementPage() {
                 {/* Cover Image Header */}
                 <div className="relative h-44 w-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
                   <img
-                    src={event.cover_image_url || '/images/obhur-sunset-yacht-dj.jpg'}
+                    src={event.cover_image_url || asset('/images/obhur-sunset-yacht-dj.jpg')}
                     alt={title}
                     onError={(e) => {
-                      e.currentTarget.src = '/images/obhur-sunset-yacht-dj.jpg';
+                      e.currentTarget.src = asset('/images/obhur-sunset-yacht-dj.jpg');
                     }}
                     className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
                   />

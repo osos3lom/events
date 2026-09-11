@@ -8,6 +8,7 @@ import { LanguageSwitcher } from '../common/LanguageSwitcher';
 import { DemoResetButton } from '../common/DemoResetButton';
 import { ThemeToggle } from '../common/ThemeToggle';
 import { getLocalizedText } from '../../lib/localeUtils';
+import { asset } from '@/lib/basePath';
 import {
   Calendar,
   Building2,
@@ -49,7 +50,7 @@ export const DefaultLayout: React.FC<{ children: React.ReactNode }> = ({ childre
 
             <Link href="/manage/events" className="flex items-center gap-2.5 group">
               <div className="w-9 h-9 rounded-xl bg-white/10 dark:bg-white/5 border border-white/10 flex items-center justify-center p-1 shadow-xs group-hover:scale-105 transition shrink-0">
-                <img src="/brand/logo-icon.png" alt="jeddah Events" className="w-full h-full object-contain" />
+                <img src={asset('/brand/logo-icon.png')} alt="jeddah Events" className="w-full h-full object-contain" />
               </div>
               <div className="flex flex-col">
                 <span className="font-bold text-white tracking-tight text-base leading-none">
